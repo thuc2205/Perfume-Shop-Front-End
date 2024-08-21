@@ -1,0 +1,78 @@
+<app-header></app-header>
+<div class="container" style="background-color: black">
+  <div class="intro-section">
+    <h1>Chi tiết Sản Phẩm</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div
+        id="carouselExampleSlidesOnly"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div
+            class="carousel-item active"
+            *ngFor="let image of product?.product_images; let i = index"
+            [ngClass]="{ active: i === currentImageIndex }"
+          >
+            <img [src]="image.url" class="product-image" alt="..." />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleSlidesOnly"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleSlidesOnly"
+          (click)="nextImage()"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="row">
+        <div class="thumbnail-container">
+          <div
+            class="thumbnail-item active"
+            *ngFor="let image of product?.product_images; let i = index"
+            [ngClass]="{ active: i === currentImageIndex }"
+            (click)="thumbnailClick(i)"
+          >
+            <img [src]="image.url" class="thumbnail-image" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="product-details">
+        <h2>Thông Tin Chi Tiết Sản Phẩm</h2>
+        <h2>NAME : {{ product?.name }}</h2>
+        <p>Mô tả {{ product?.description }}</p>
+        <p>Giá : {{ product?.price }}</p>
+        <div class="product-action">
+          <button class="btn btn-primary" (click)="addToCard()">
+            Thêm Vào Giỏ
+          </button>
+          <button class="btn btn-success" (click)="buyNow()">Mua Ngay</button>
+        </div>
+        <div class="product-quantify">
+          <div class="boder-wrapper">
+            <button (click)="decreaseQuantify()">-</button>
+            <input type="text" [value]="quantify" />
+            <button (click)="increaseQuantify()">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,30 @@
+.container{
+    color: white;
+}
+.login-form{
+    background-color: burlywood;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    border: 1 solid black;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.password-field{
+    position: relative;
+}
+.fa-solid{
+    position: absolute;
+    top: 50;
+    right: 20px;
+    transform: translateY(-150%);
+    cursor: pointer;
+    color: black;
+}
+.login-button{
+    width: 200px;
+    margin-top: 20px;
+    border-radius: 20px;
+    background-color: thistle;
+}

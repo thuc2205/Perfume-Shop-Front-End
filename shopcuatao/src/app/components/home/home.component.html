@@ -1,0 +1,72 @@
+<app-header>app-header></app-header>
+<div class="container">
+  <div class="content-main">
+    <h1>Sản Phẩm</h1>
+  </div>
+  <div class="search">
+    <input
+      type="text"
+      name=""
+      id=""
+      class="form-control search-input"
+      placeholder="Tìm Sản Phẩm"
+      [(ngModel)]="keyword"
+    />
+    <select
+      class="form-control product-category"
+      [(ngModel)]="selectedCategoryId"
+    >
+      <option [value]="0">Tất Cả Danh Mục</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
+    <button class="btn btn-success" (click)="searchProducts()">Tìm Kiếm</button>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-6" *ngFor="let product of products">
+      <div class="product-item mt-5">
+        <img [src]="product.url" alt="" class="product-image" />
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-description">{{ product.description }}</p>
+        <p class="product-price">
+          <del>Gia ${{ product.price }}</del>
+        </p>
+        <div class="product-action">
+          <button class="btn btn-primary">Thêm Vào Giỏ</button>
+          <span class="thuc"></span>
+          <button class="btn btn-success">Mua Ngay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" *ngIf="currentPage > 1">
+      <a class="page-link" href="#" (click)="onPageChange(1)">First</a>
+    </li>
+    <li class="page-item" *ngIf="currentPage > 1">
+      <a class="page-link" href="#" (click)="onPageChange(currentPage - 1)"
+        >Previous</a
+      >
+    </li>
+    <ng-container *ngFor="let page of visiblePages">
+      <li class="page-item" [ngClass]="{ active: page === currentPage }">
+        <a class="page-link" href="#" (click)="onPageChange(page)">{{
+          page
+        }}</a>
+      </li>
+    </ng-container>
+    <li class="page-item" *ngIf="currentPage < totalPages">
+      <a class="page-link" href="#" (click)="onPageChange(currentPage + 1)"
+        >Next</a
+      >
+    </li>
+    <li class="page-item" *ngIf="currentPage < totalPages">
+      <a class="page-link" href="#" (click)="onPageChange(totalPages)">Last</a>
+    </li>
+  </ul>
+</nav>
+
+<app-footer></app-footer>

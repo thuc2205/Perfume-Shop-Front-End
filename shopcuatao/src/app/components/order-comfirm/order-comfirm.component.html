@@ -1,0 +1,50 @@
+<style></style>
+<app-header></app-header>
+<div class="container" style="background-color: black">
+  <div class="intro-section">
+    <h1 class="text-danger">Xac Nhan Đặt Hàng</h1>
+  </div>
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Sản Phẩm</th>
+          <th scope="col">Số Lượng</th>
+          <th scope="col">Đơn Giá</th>
+          <th scope="col">Tổng Giá</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of cardItems">
+        <tr>
+          <td>
+            <div class="product-info">
+              <img
+                class="product-image"
+                [src]="item.product.thumbnail"
+                alt=""
+              />
+              <span class="product-name">{{ item.product.name }}</span>
+            </div>
+          </td>
+          <td>{{ item.quantity }}</td>
+          <td>
+            {{ item.product.price | currency : "VND" : "symbol" : "1.0-0" }}
+          </td>
+          <td>
+            {{
+              item.product.price * item.quantity
+                | currency : "VND" : "symbol" : "1.0-0"
+            }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mb-0">
+    TONG TIEN : {{ totalAmount | currency : "VND" : "symbol" : "1.0-0" }}
+  </p>
+  <div class="text-center mt-5">
+    <button class="btn btn-gradient" type="button">Dat Hang</button>
+  </div>
+</div>
+<app-footer></app-footer>

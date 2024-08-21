@@ -1,0 +1,181 @@
+<app-header></app-header>
+<div class="container" style="background-color: black">
+  <div class="intro-section">
+    <h1>Đặt Hàng</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mt-5">
+      <h3 class="product-h3">Thông Tin Người Nhận</h3>
+      <form [formGroup]="orderForm" (ngSubmit)="comfirm()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Họ Tên</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="fullname"
+            [class.is-invalid]="
+              orderForm.get('fullname')!.invalid &&
+              orderForm.get('fullname')!.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              orderForm.get('fullname')!.invalid &&
+              orderForm.get('fullname')!.touched
+            "
+          >
+            Họ tên không được để trống
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            [class.is-invalid]="
+              orderForm.get('email')!.invalid && orderForm.get('email')!.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              orderForm.get('email')!.invalid && orderForm.get('email')!.touched
+            "
+          >
+            Email không hợp lệ
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Số Điện Thoại</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            formControlName="phone_number"
+            [class.is-invalid]="
+              orderForm.get('phone_number')!.invalid &&
+              orderForm.get('phone_number')!.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              orderForm.get('phone_number')!.invalid &&
+              orderForm.get('phone_number')!.touched
+            "
+          >
+            Số điện thoại không hợp lệ
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Địa Chỉ</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            formControlName="address"
+            [class.is-invalid]="
+              orderForm.get('address')!.invalid &&
+              orderForm.get('address')!.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              orderForm.get('address')!.invalid &&
+              orderForm.get('address')!.touched
+            "
+          >
+            Địa chỉ không hợp lệ
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="note" class="form-label">Ghi Chú</label>
+          <input
+            type="text"
+            class="form-control"
+            id="note"
+            formControlName="note"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="shipping_method" class="form-label">Vận Chuyển</label>
+          <select
+            class="form-control"
+            id="shipping_method"
+            formControlName="shipping_method"
+          >
+            <option value="Express">Hỏa Tốc</option>
+            <option value="Regular">Thường</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="payment_method" class="form-label">Thanh Toán</label>
+          <select
+            class="form-control"
+            id="payment_method"
+            formControlName="payment_method"
+          >
+            <option value="cod">Thanh Toán Khi Nhận Hàng</option>
+            <option value="other">Thanh Toán Khác</option>
+          </select>
+        </div>
+        <div class="text-start mb-3">
+          <button class="btn btn-gradient" type="submit">Xác Nhận</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 mt-5">
+      <h3 class="product-h3">Đơn Hàng</h3>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" class="text-start">Sản Phẩm</th>
+            <th scope="col">Số Lượng</th>
+            <th scope="col">Đơn Giá</th>
+            <th scope="col">Tổng Giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cardItems">
+            <td>
+              <div class="product-info">
+                <span class="product-name">{{ item.product.name }}</span>
+              </div>
+            </td>
+            <td>{{ item.quantity }}</td>
+            <td>
+              {{ item.product.price | currency : "VND" : "symbol" : "1.0-0" }}
+            </td>
+            <td>
+              {{
+                item.product.price * item.quantity
+                  | currency : "VND" : "symbol" : "1.0-0"
+              }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-start mt-3">
+        <p class="mb-0">TỔNG TIỀN: {{ totalAmount | number : "1.2-2" }}</p>
+        <div class="text-center mt-5">
+          <button class="btn btn-gradient" type="button" (click)="comfirm()">
+            Đặt Hàng
+          </button>
+        </div>
+      </div>
+      <div class="mt-3">
+        <label for="coupon" class="form-label">Nhập coupon</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="coupon" />
+          <button class="btn btn-success">Áp Dụng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

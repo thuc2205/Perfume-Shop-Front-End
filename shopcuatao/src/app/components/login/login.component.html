@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="login-form mx-auto">
+                <h2>Đăng Nhập</h2>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone</label>
+                    <input type="text" class="form-control" (ngModelChange)="onPhoneChange()" (focus)="loginForm.form.markAsTouched()" [(ngModel)]="phone"
+                    name="phone" >
+                    <div class="divider-nospace"></div>
+                    <div class="mt-5"></div>
+                    <div class="form-group password-field">
+                        <label for="">Mật Khẩu</label>
+                        <input type="password" class="form-control" id="pass" placeholder="3 kí tự" name="password"
+                        [(ngModel)]="password" >
+                        <i class="fa-solid fa-eye"></i>
+                        <div class="divider-nospace"></div>
+                    </div>
+                    <div class="form-group">
+                        <span style="display: flex;">
+                            <input type="checkbox" id="remmber"  [(ngModel)]="rememberMe">
+                            <label for="" class="form-check-label text-start">Ghi Nhớ Mật Khẩu</label>
+                        </span>
+                        <a href="" class="register-link">Quên Mật Khẩu</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select name="" id="" class="form-control acess-right" 
+                    [(ngModel)]="selectedRole">
+                        <option value="" selected disabled>Quyền Đăng Nhập</option>
+                        <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
+                        
+                    </select>
+                </div>
+                <button type="button" class="login-button" (click)="login()">Đăng Nhập</button>
+                <div class="diviver"></div>
+                <a href="" class="register-link">Tạo Tài Khoản</a>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
